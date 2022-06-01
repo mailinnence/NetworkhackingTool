@@ -14,8 +14,9 @@ import telnetlib
 import time
 
 
-
+# 로딩과 선택지 관련 클래스
 class opening():
+    # 로딩 애니메이션 과 썸네일 
     def loading(self):
         a="============================================="
         l = list(a)
@@ -37,6 +38,8 @@ class opening():
         print(" h     h     aaaa  a    ccccc     k   k   \n")
 
         
+        
+    #기본 선택지    
     def index(self):    
         print("\nservice-------------")
         print("1.호스트 , 포트 스캔")
@@ -47,14 +50,13 @@ class opening():
         
         select = int(input("select number : "))
     
+    
+    
+    
         #스캔 관련 설정
         if select == 1:
             print("Scan")
-            
-                
-                
-                
-                
+
         #ssh 관련 설정        
         if select == 2:
             print("5.FTP 관련 공격")
@@ -69,9 +71,7 @@ class opening():
                 print("1.bruteLogin")
                 SSH().bruteLogin()
                 opening().con()
-        
-        
-        
+
         #ftp 관련 설정
         if select == 3:
             print("5.FTP 관련 공격")
@@ -82,16 +82,19 @@ class opening():
             print("--------------------\n")
             select1 = int(input("select number : "))
             
+            #ftp.bruteLogin  
             if select1 == 1:
                 print("1.bruteLogin")
                 FTP().bruteLogin()
                 opening().con()
-                
+            
+            #ftp.filedownload    
             if select1 == 2:
                 print("2.filedownload")
                 FTP().get_list_ftp()
                 opening().con()
-                 
+            
+            #ftp.injection     
             if select1 == 3:
                 print("3.injectPage") 
                 FTP().injectPage()    
@@ -103,6 +106,8 @@ class opening():
             opening().con()          
         
             
+            
+    #스캔이나 공격이 끝난 후에 프로그램을 계속할 것 인지        
     def con(self):
         ans=input("Continue the program? Y/N :")
         if ans =="y" or ans =="Y" :
@@ -112,8 +117,10 @@ class opening():
             
             
             
-                    
+#ftp 관련 클래스                    
 class FTP():
+    
+    #ftp.bruteLogin  
     def bruteLogin(self):
         hostname = input("input host ip : ")
         passwdFile = 'userpass.txt'
@@ -134,7 +141,7 @@ class FTP():
         print ('[-] Could not brute force FTP credentials.')
         return (None, None)
             
-            
+    #ftp.filedownload        
     def get_list_ftp(self):
         host=input("input host ip : ")
         ftp = ftplib.FTP(host)
@@ -159,7 +166,7 @@ class FTP():
             print(res)
             f.close()            
             
-
+    #ftp.injection 
     def injectPage(self):
         host = input("Input host : ")
         userName = input("Input userName : ")
@@ -193,8 +200,9 @@ class FTP():
 
 
 
-
+#ssh 관련 클래스
 class SSH():
+    #ssh.bruteLogin 
     def bruteLogin(self):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(AutoAddPolicy())
@@ -220,11 +228,13 @@ class SSH():
             ssh.close()
        
          
-         
+#telnet 관련 클래스        
 class TELNET():
+    #telnet.bruteLogin
     def bruteLogin(self):
         host1 = input("Input host : ")
 
+        ##telnet.bruteLogin 는 외부 파일이 아니라 리스트를 이용
         SERVER = [
                     (host1, 'root1', '123456'),
                     (host1, 'bar', 'bar1234'),
@@ -251,7 +261,7 @@ class TELNET():
 
 
 
-
+#호스트 포트 스캔
 def hostscan(target):
     ports = [21,22,23, 53, 80, 443, 3306]    
     alive = os.system("ping -c 1 " + str(target) + " > /dev/null")
@@ -277,8 +287,12 @@ def worker():
 
 
 if __name__ == '__main__':
+    #로딩 이펙트
     opening().loading()
+    
+    #기본창 
     opening().index()
+    
     print("특정 네트워크 주소의 작동중인 모든 호스트와 열려 있는 포트를 스캔합니다")    
     print("Enter network address : ")
     hOst=input("ex) 10.10.10.0/24 , 192.168.55.0/24 : ") 
