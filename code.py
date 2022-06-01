@@ -246,7 +246,7 @@ class TELNET():
 
             tn.write(b'free\n')
             tn.write(b'exit\n') 
-        print(tn.read_all())
+            print(tn.read_all())
             
 
 
