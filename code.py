@@ -12,6 +12,8 @@ import time
 import getpass
 import telnetlib
 import time
+import sys
+
 
 
 # 로딩과 선택지 관련 클래스
@@ -114,6 +116,7 @@ class opening():
             opening().index()
         else:
             print("Thank you ~~~~~~~~")     
+            sys.exit(0)
             
             
             
