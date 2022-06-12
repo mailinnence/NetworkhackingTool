@@ -149,7 +149,7 @@ class FTP():
         host=input("input host ip : ")
         ftp = ftplib.FTP(host)
         user=input("input user id : ")
-        passwd = input("input password : ")
+        passwd = getpass.getpass("Input passWord : ")
         ftp.login(user=user, passwd=passwd)
         data=[]
         files=[]
