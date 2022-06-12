@@ -150,7 +150,7 @@ class FTP():
         ftp = ftplib.FTP(host)
         user=input("input user id : ")
         passwd = getpass.getpass("Input passWord : ")
-        ftp.login(user=user, passwd=passwd)
+        ftp.login(user, passwd)
         data=[]
         files=[]
         directories=[]
