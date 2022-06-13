@@ -61,7 +61,7 @@ class opening():
 
         #ssh 관련 설정        
         if select == 2:
-            print("5.FTP 관련 공격")
+            print("2.ssh 관련 공격")
             print("\nservice-------------")
             print("1.bruteLogin")
             #print("2.filedownload")
@@ -76,7 +76,7 @@ class opening():
 
         #ftp 관련 설정
         if select == 3:
-            print("5.FTP 관련 공격")
+            print("3.FTP 관련 공격")
             print("\nservice-------------")
             print("1.bruteLogin")
             print("2.filedownload")
