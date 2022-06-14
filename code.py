@@ -152,16 +152,19 @@ class FTP():
         passwd = getpass.getpass("Input passWord : ")
         ftp.login(user, passwd)
         print("이동할 곳을 눌러주세요 설정이 끝나면 exit 를 눌러주세요")
-        print("ex) /home/s120180366/public_html/")
+        print("ex) /home/s120180366/public_html/\n")
         pwd=ftp.pwd()
-        print("현재위치 >> ",pwd)
+        nlst = ftp.nlst()
+        print("현재위치 >> ",pwd,"\n에 들어있는 파일 및 디렉터리들은 \n\n", nlst)
         while True:
             a=input(">>")
             if a=="exit":
                 break
-            chdir = ftp.cwd(a)
+            else:
+                chdir = ftp.cwd(a)
             pwd=ftp.pwd()
-            print(pwd)
+            nlst = ftp.nlst()
+            print("현재위치 >> ",pwd," 에 들어있는 파일 및 디렉터리들은 ", nlst)
         data=[]
         files=[]
         directories=[]
